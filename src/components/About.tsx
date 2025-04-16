@@ -2,13 +2,21 @@ import { usePlace } from '../context/PlaceContext';
 import { places } from '../data/placesData';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useCountUp } from "../hooks/useCountUp";
+import {useEffect} from "react";
 
 export default function About() {
-    const { selectedPlace } = usePlace() as { selectedPlace: string };
+    const { selectedPlace, triggerCountUp, setTriggerCountUp } = usePlace() as {
+        selectedPlace: string, triggerCountUp: boolean, setTriggerCountUp : (value: boolean) => void};
     const place = places[selectedPlace];
 
     const { ref: visitorCountRef, update } = useCountUp(place?.todayVisitors || 0, { duration: 2 });
 
+    useEffect(() => {
+        if (triggerCountUp) {
+            update(place?.todayVisitors || 0);
+            setTriggerCountUp(false); // 트리거 초기화
+        }
+    }, [triggerCountUp, place, update, setTriggerCountUp]);
 
     if (!place) return <div className="p-8 text-gray-500">정보를 찾을 수 없습니다.</div>;
 

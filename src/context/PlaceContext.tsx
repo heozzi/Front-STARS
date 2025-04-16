@@ -1,26 +1,30 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+// src/context/PlaceContext.tsx
+import { createContext, useContext, useState } from 'react';
 
-type PlaceContextType = {
+interface PlaceContextType {
     selectedPlace: string;
-    setSelectedPlace: React.Dispatch<React.SetStateAction<string>>;
-};
+    setSelectedPlace: (placeId: string) => void;
+    triggerCountUp: boolean;
+    setTriggerCountUp: (value: boolean) => void;
+}
 
-const PlaceContext = createContext<PlaceContextType | null>(null);
+const PlaceContext = createContext<PlaceContextType | undefined>(undefined);
 
-export const PlaceProvider = ({ children }: { children: ReactNode }) => {
-    const [selectedPlace, setSelectedPlace] = useState("seoulPlaza");
+export function PlaceProvider({ children }: { children: React.ReactNode }) {
+    const [selectedPlace, setSelectedPlace] = useState<string>('');
+    const [triggerCountUp, setTriggerCountUp] = useState<boolean>(false);
 
     return (
-        <PlaceContext.Provider value={{ selectedPlace, setSelectedPlace }}>
+        <PlaceContext.Provider value={{ selectedPlace, setSelectedPlace, triggerCountUp, setTriggerCountUp }}>
             {children}
         </PlaceContext.Provider>
     );
-};
+}
 
-export const usePlace = () => {
+export function usePlace() {
     const context = useContext(PlaceContext);
     if (!context) {
-        throw new Error("usePlace must be used within a PlaceProvider");
+        throw new Error('usePlace must be used within a PlaceProvider');
     }
     return context;
-};
+}
