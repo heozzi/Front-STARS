@@ -1,10 +1,14 @@
 import { usePlace } from '../context/PlaceContext';
 import { places } from '../data/placesData';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { useCountUp } from "../hooks/useCountUp";
 
 export default function About() {
     const { selectedPlace } = usePlace() as { selectedPlace: string };
     const place = places[selectedPlace];
+
+    const { ref: visitorCountRef, update } = useCountUp(place?.todayVisitors || 0, { duration: 2 });
+
 
     if (!place) return <div className="p-8 text-gray-500">정보를 찾을 수 없습니다.</div>;
 
@@ -14,8 +18,16 @@ export default function About() {
             <div className="bg-white rounded-2xl shadow p-6 col-span-3">
                 <h2 className="text-xl text-gray-700 font-semibold">{place.name}</h2>
                 <p className="text-lg text-gray-500">{place.address}</p>
-                <p className="text-4xl text-gray-700 font-bold mt-4">{place.todayVisitors.toLocaleString()}명</p>
-                <p className="text-lg mt-2 text-gray-400">오늘 방문객</p>
+                <p className="text-4xl text-gray-700 font-bold mt-4">
+                    <span ref={visitorCountRef}></span>명
+                </p>
+                <p className="text-xl mt-2 text-gray-400">오늘 방문객</p>
+                <p
+                    onClick={() => update(place?.todayVisitors + 100)}
+                    className="mt-2 text-sm text-gray-500 underline hover:text-gray-700 transition cursor-pointer"
+                >
+                    방문자 수 업데이트
+                </p>
             </div>
 
             {/* 주간 방문자 추이 */}
