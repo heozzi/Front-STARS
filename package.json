@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@fullpage/react-fullpage": "^0.1.48",
-    "framer-motion": "^12.7.2",
+    "countup.js": "^2.8.0",
+    "framer-motion": "^12.7.3",
     "fullpage.js": "4.0.5",
     "mapbox-gl": "^3.11.0",
     "react": "^19.0.0",
