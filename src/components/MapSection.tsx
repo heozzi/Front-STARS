@@ -24,6 +24,7 @@ export default function MapSection() {
     const { setSelectedPlace } = usePlace() as { setSelectedPlace: (placeId: string) => void };
     const [showFocusCard, setShowFocusCard] = useState(false);
     const [focusedPlace, setFocusedPlace] = useState<keyof typeof places | null>(null);
+    const { setTriggerCountUp } = usePlace(); // Trigger CountUp
 
     const summary = focusedPlace ? places[focusedPlace] : null;
 
@@ -149,6 +150,7 @@ export default function MapSection() {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setShowFocusCard(false);
+                                    setTriggerCountUp(true); // CountUp 트리거 설정
                                     window.fullpage_api?.moveSectionDown();
                                 }}
                                 className="cursor-pointer bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center text-4xl font-bold text-indigo-600 hover:bg-indigo-600 hover:text-white"
