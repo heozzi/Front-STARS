@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import "mapbox-gl/dist/mapbox-gl.css";
+import { CountUp } from 'countup.js';
 import { usePlace } from '../context/PlaceContext';
 import { motion } from 'framer-motion';
 import { places } from '../data/placesData';
@@ -19,6 +20,7 @@ const markerPlaces: MarkerPlace[] = [
 
 export default function MapSection() {
     const mapContainer = useRef<HTMLDivElement | null>(null);
+    const visitorCountRef = useRef<HTMLSpanElement | null>(null);
     const { setSelectedPlace } = usePlace() as { setSelectedPlace: (placeId: string) => void };
     const [showFocusCard, setShowFocusCard] = useState(false);
     const [focusedPlace, setFocusedPlace] = useState<keyof typeof places | null>(null);
@@ -37,13 +39,25 @@ export default function MapSection() {
 
         markerPlaces.forEach((place) => {
             const marker = new mapboxgl.Marker().setLngLat(place.coords).addTo(map);
+            const markerElement = marker.getElement();
+            markerElement.style.cursor = 'pointer';
 
-            marker.getElement().addEventListener('click', () => {
+            markerElement.addEventListener('click', () => {
                 setSelectedPlace(place.id);
                 setFocusedPlace(place.id);
                 map.flyTo({ center: place.coords, zoom: 16, pitch: 45 });
                 map.once('moveend', () => {
                     setShowFocusCard(true);
+
+                    // CountUp 초기화 및 실행
+                    if (visitorCountRef.current && places[place.id]) {
+                        const countUp = new CountUp(visitorCountRef.current, places[place.id].todayVisitors, { duration: 5 });
+                        if (!countUp.error) {
+                            countUp.start();
+                        } else {
+                            console.error(countUp.error);
+                        }
+                    }
                 });
             });
         });
@@ -79,67 +93,73 @@ export default function MapSection() {
                 {/* 카드들 */}
                 {summary && (
                     <div
-                        className="relative z-20 flex flex-wrap justify-center items-center gap-4 max-w-5xl w-full px-6"
+                        className="relative z-20 flex flex-col items-center gap-6 max-w-5xl w-full px-6"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* 방문자 카드 */}
+                        {/* 방문자 카드 - 중앙 정렬, 단독 */}
                         <motion.div
-                            className="bg-white rounded-2xl shadow-lg p-4"
+                            className="bg-white rounded-2xl shadow-lg p-4 w-2/5 content-center"
                             style={{ willChange: 'transform, opacity' }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.3 }}
                             whileHover={{ y: -8 }}
                         >
                             <h3 className="text-xl text-gray-500 mb-1">{summary.name} 방문자 수</h3>
-                            <p className="text-5xl font-bold text-gray-900">{summary.todayVisitors.toLocaleString()}명</p>
+                            <p className="text-5xl font-bold text-gray-900">
+                                <span ref={visitorCountRef}></span>명
+                            </p>
                         </motion.div>
 
-                        {/* 행사 카드 */}
-                        <motion.div
-                            className="bg-red-500 text-white rounded-2xl shadow-lg p-4"
-                            style={{ willChange: 'transform, opacity' }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                            whileHover={{ y: -8 }}
-                        >
-                            <h3 className="text-xl font-medium mb-1">행사</h3>
-                            <ul className="text-2xl space-y-1">
-                                {summary.events.map((e, idx) => (
-                                    <li key={idx}>{e}</li>
-                                ))}
-                            </ul>
-                        </motion.div>
+                        {/* 나머지 카드들 - 행사, 키워드, 자세히 보기 */}
+                        <div className="flex flex-wrap justify-center items-start gap-4 w-full">
+                            {/* 행사 카드 */}
+                            <motion.div
+                                className="bg-red-500 text-white rounded-2xl shadow-lg p-4"
+                                style={{ willChange: 'transform, opacity' }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                                whileHover={{ y: -8 }}
+                            >
+                                <h3 className="text-xl font-medium mb-1">행사</h3>
+                                <ul className="text-2xl space-y-1">
+                                    {summary.events.map((e, idx) => (
+                                        <li key={idx}>{e}</li>
+                                    ))}
+                                </ul>
+                            </motion.div>
 
-                        {/* 키워드 카드 */}
-                        <motion.div
-                            className="bg-blue-600 text-white w-1/5 rounded-2xl shadow-lg p-4"
-                            style={{ willChange: 'transform, opacity' }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                            whileHover={{ y: -8 }}
-                        >
-                            <h3 className="text-xl font-medium mb-1">관심 키워드</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {summary.tags.map((tag) => (
-                                    <span key={tag} className="bg-white/20 text-white text-l px-3 py-1 rounded-full">#{tag}</span>
-                                ))}
-                            </div>
-                        </motion.div>
-                        {/* 자세히 보기 트리거 */}
-                        <motion.div
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowFocusCard(false);
-                                window.fullpage_api?.moveSectionDown();
-                            }}
-                            className="cursor-pointer bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center text-4xl font-bold text-indigo-600 hover:bg-indigo-600 hover:text-white"
-                            style={{ willChange: 'transform, opacity' }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                            whileHover={{ y: -8 }}
-                        >
-                            자세히 보기 →
-                        </motion.div>
+                            {/* 키워드 카드 */}
+                            <motion.div
+                                className="bg-blue-600 text-white w-1/5 rounded-2xl shadow-lg p-4"
+                                style={{ willChange: 'transform, opacity' }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                                whileHover={{ y: -8 }}
+                            >
+                                <h3 className="text-xl font-medium mb-1">관심 키워드</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {summary.tags.map((tag) => (
+                                        <span key={tag} className="bg-white/20 text-white text-l px-3 py-1 rounded-full">#{tag}</span>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* 자세히 보기 */}
+                            <motion.div
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowFocusCard(false);
+                                    window.fullpage_api?.moveSectionDown();
+                                }}
+                                className="cursor-pointer bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center text-4xl font-bold text-indigo-600 hover:bg-indigo-600 hover:text-white"
+                                style={{ willChange: 'transform, opacity' }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                                whileHover={{ y: -8 }}
+                            >
+                                자세히 보기 →
+                            </motion.div>
+                        </div>
                     </div>
                 )}
             </motion.div>
