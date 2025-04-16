@@ -1,17 +1,4 @@
-export interface WeeklyStat {
-    day: string;
-    population: number;
-}
-
-export interface Place {
-    name: string;
-    address: string;
-    image: string;
-    todayVisitors: number;
-    weeklyStats: WeeklyStat[];
-    events: string[];
-    tags: string[];
-}
+import { Place } from 'place';
 
 export const places: Record<string, Place> = {
     seoulPlaza: {
