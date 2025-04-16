@@ -1,4 +1,4 @@
-export function Card({ className = '', children }) {
+export function Card({ className = '', children }: { className?: string; children?: React.ReactNode }) {
     return (
         <div className={`bg-white rounded-xl shadow p-4 ${className}`}>
             {children}
@@ -6,6 +6,6 @@ export function Card({ className = '', children }) {
     );
 }
 
-export function CardContent({ className = '', children }) {
+export function CardContent({ className = '', children }: { className?: string; children?: React.ReactNode }) {
     return <div className={`p-2 ${className}`}>{children}</div>;
 }

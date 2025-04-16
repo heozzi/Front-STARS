@@ -2,7 +2,7 @@ import { usePlace } from '../context/PlaceContext';
 import { places } from '../data/placesData';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useCountUp } from "../hooks/useCountUp";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 export default function About() {
     const { selectedPlace, triggerCountUp, setTriggerCountUp } = usePlace() as {
