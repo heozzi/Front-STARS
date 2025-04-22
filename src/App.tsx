@@ -5,7 +5,7 @@ import MapSection from './components/MapSection';
 // import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import MyPage from './components/MyPage';
+import Admin from './components/Admin'
 import DashboardDemo from './components/DashboardDemo';
 
 function App(): JSX.Element {
@@ -30,7 +30,7 @@ function App(): JSX.Element {
                         {/* 첫 번째 섹션: 가로 슬라이드 2개 (지도, 마이페이지) */}
                         <div className="section">
                             <div className="slide"><MapSection /></div>
-                            <div className="slide"><MyPage /></div>
+                            <div className="slide"><Admin /></div>
                         </div>
 
                         {/* 이후 세로 섹션들 (About, Projects, Contact) */}
