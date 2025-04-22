@@ -446,7 +446,7 @@ function Admin() {
                 >
                     ← 돌아가기
                 </button>
-                <h1 className="text-2xl font-bold">STARS 관리자 통합 화면</h1>
+                <h1 className="text-2xl font-bold text-black">STARS 관리자 통합 화면</h1>
                 <div className="w-36"></div> {/* 더미 요소로 제목 중앙 정렬 유지 */}
             </div>
 
@@ -454,7 +454,7 @@ function Admin() {
             <div className="flex flex-1 overflow-hidden p-4">
                 {/* 왼쪽 패널 - 여의도 카드 목록 */}
                 <div className="w-1/4 p-4 flex flex-col bg-white rounded-lg mr-4 shadow-md" style={{ maxHeight: 'calc(100vh - 100px)' }}>
-                    <h2 className="text-xl m-2 font-bold">주요 인구 혼잡 현황</h2>
+                    <h2 className="text-xl m-2 font-bold text-black">주요 인구 혼잡 현황</h2>
 
                     {/* 스크롤 컨테이너 */}
                     <div className="overflow-hidden flex-1 relative" style={{ minHeight: '400px' }}>
@@ -474,7 +474,7 @@ function Admin() {
                                 {touristSpots.map((spot, index) => (
                                     <div key={index} className="bg-white p-4 rounded-lg shadow-sm relative spot-card border-gray-400 border-2">
                                         <div className="flex justify-between">
-                                            <div className="text-lg font-bold">{spot.name}</div>
+                                            <div className="text-lg font-bold text-black">{spot.name}</div>
                                             <div>{spot.status}</div>
                                         </div>
                                         <div className="text-gray-500 text-sm">{spot.code}</div>
@@ -489,28 +489,28 @@ function Admin() {
                 <div className="w-3/4 flex flex-col" style={{ maxHeight: 'calc(100vh - 100px)' }}>
                     {/* 날씨 카드 영역 - 상단 */}
                     <div className="mb-6 border-2 rounded-lg shadow-md p-4 bg-white">
-                        <h2 className="text-xl font-bold mb-4">날씨 정보</h2>
+                        <h2 className="text-xl font-bold mb-4 text-black">날씨 정보</h2>
                         <div className="grid grid-cols-5 gap-4">
                             {weatherData.map((data, index) => (
                                 <div key={index} className="bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow overflow-hidden">
-                                    <div className="p-2 text-center text-base font-medium bg-blue-100 border-b border-blue-200">
+                                    <div className="p-2 text-center text-base font-medium bg-blue-100 border-b border-blue-200 text-black">
                                         {data.date}
                                         <div className="text-sm text-blue-700">{data.hour}</div>
                                     </div>
                                     <div className="p-3 text-center">
                                         <div className="text-4xl mb-2">{data.icon}</div>
-                                        <div className="text-sm mb-1">{data.status}</div>
+                                        <div className="text-sm mb-1 text-black">{data.status}</div>
                                         <div className="font-bold text-2xl text-blue-800">{data.temperature}</div>
                                     </div>
                                     <div className="border-t border-gray-200 p-2 bg-gray-50">
                                         <div className="flex justify-between items-center mb-1 text-sm">
-                                            <div className="font-medium">미세먼지:</div>
+                                            <div className="font-medium text-black">미세먼지:</div>
                                             <div className={`font-medium ${getDustColor(data.dust.fineDust)}`}>
                                                 {data.dust.fineDust}
                                             </div>
                                         </div>
                                         <div className="flex justify-between items-center text-sm">
-                                            <div className="font-medium">초미세먼지:</div>
+                                            <div className="font-medium text-black">초미세먼지:</div>
                                             <div className={`font-medium ${getDustColor(data.dust.ultraFineDust)}`}>
                                                 {data.dust.ultraFineDust}
                                             </div>
@@ -523,10 +523,10 @@ function Admin() {
                     {/* 관광지 정보 테이블 - 하단 */}
                     <div className="flex-1 flex flex-col bg-white rounded-lg shadow-md overflow-hidden border-2">
                         <div className="grid grid-cols-4 bg-gray-100 py-3 border-b font-medium text-lg">
-                            <div className="text-center">관광지명</div>
-                            <div className="text-center">관광지 코드</div>
-                            <div className="text-center">시간(측정시간)</div>
-                            <div className="text-center">혼잡도</div>
+                            <div className="text-center text-black">관광지명</div>
+                            <div className="text-center text-black">관광지 코드</div>
+                            <div className="text-center text-black">시간(측정시간)</div>
+                            <div className="text-center text-black">혼잡도</div>
                         </div>
                         <div
                             ref={touristInfoScrollRef}
@@ -538,10 +538,10 @@ function Admin() {
                         >
                             {touristInfo.map((info, index) => (
                                 <div key={index} className="grid grid-cols-4 py-4 border-b hover:bg-gray-50 transition-colors">
-                                    <div className="text-center">{info.spotName}</div>
-                                    <div className="text-center">{info.spotCode}</div>
-                                    <div className="text-center">{info.timestamp}</div>
-                                    <div className="text-center font-medium">{info.participantCount}</div>
+                                    <div className="text-center text-black">{info.spotName}</div>
+                                    <div className="text-center text-black">{info.spotCode}</div>
+                                    <div className="text-center text-black">{info.timestamp}</div>
+                                    <div className="text-center font-medium text-black">{info.participantCount}</div>
                                 </div>
                             ))}
                         </div>
