@@ -1,42 +1,46 @@
-import './App.css';
-import About from './components/About.tsx';
-import Contact from './components/Contact.tsx';
-import Projects from './components/Projects.tsx';
-import MapSection from './components/MapSection.tsx';
-import MyPage from './components/MyPage.tsx';
-import { useEffect, useRef } from 'react';
-import 'fullpage.js';
-import 'fullpage.js/dist/jquery.fullPage.css';
+// src/App.tsx
+import {JSX, useEffect} from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
+import MapSection from './components/MapSection';
+import About from './components/About';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
+import MyPage from './components/MyPage';
 
-// 왜 JSX를 찾지 못하니??????
 function App(): JSX.Element {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const disableScroll = () => {
+            if (window.fullpage_api) {
+                window.fullpage_api.setAllowScrolling(false);
+                window.fullpage_api.setKeyboardScrolling(false);
+            }
+        };
+        setTimeout(disableScroll, 500);
+    }, []);
 
-  useEffect(()=>{
-    if(window.fullpage_api){
-      window.fullpage_api.setAllowScrolling(false);
-        window.fullpage_api.setKeyboardScrolling(false);
-    }
-  },[]);
+    return (
+        <ReactFullpage
+            scrollingSpeed={700}
+            controlArrows={false}
+            credits={{ enabled: false }}
+            render={() => {
+                return (
+                    <ReactFullpage.Wrapper>
+                        {/* 첫 번째 섹션: 가로 슬라이드 2개 (지도, 마이페이지) */}
+                        <div className="section">
+                            <div className="slide"><MapSection /></div>
+                            <div className="slide"><MyPage /></div>
+                        </div>
 
-  return (    
-      <ReactFullpage
-        scrollingSpeed={700}
-        controlArrows={false}
-        render={() => (
-          <ReactFullpage.Wrapper>
-            <div className='section'>
-              <div className="slide"><MapSection /></div>
-              <div className="slide"><MyPage /></div>
-            </div>
-            <div className="section"><About /></div>
-            <div className="section"><Projects /></div>
-            <div className="section"><Contact /></div>
-          </ReactFullpage.Wrapper>
-        )}
-      />
-  );
+                        {/* 이후 세로 섹션들 (About, Projects, Contact) */}
+                        <div className="section"><About /></div>
+                        <div className="section"><Projects /></div>
+                        <div className="section"><Contact /></div>
+                    </ReactFullpage.Wrapper>
+                );
+            }}
+        />
+    );
 }
 
 export default App;

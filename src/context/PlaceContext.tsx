@@ -1,30 +1,30 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+// src/context/PlaceContext.tsx
+import { createContext, useContext, useState } from 'react';
 
-// 👉 1. context에 사용할 타입 정의
-type PlaceContextType = {
+interface PlaceContextType {
     selectedPlace: string;
-    setSelectedPlace: (place: string) => void;
-};
+    setSelectedPlace: (placeId: string) => void;
+    triggerCountUp: boolean;
+    setTriggerCountUp: (value: boolean) => void;
+}
 
-// 👉 2. context 생성 (초기값은 null, 타입은 PlaceContextType | null)
-const PlaceContext = createContext<PlaceContextType | null>(null);
+const PlaceContext = createContext<PlaceContextType | undefined>(undefined);
 
-// 👉 3. Provider 컴포넌트 정의
-export const PlaceProvider = ({ children }: { children: ReactNode }) => {
-    const [selectedPlace, setSelectedPlace] = useState<string>('seoulPlaza');
+export function PlaceProvider({ children }: { children: React.ReactNode }) {
+    const [selectedPlace, setSelectedPlace] = useState<string>('');
+    const [triggerCountUp, setTriggerCountUp] = useState<boolean>(false);
 
     return (
-        <PlaceContext.Provider value={{ selectedPlace, setSelectedPlace }}>
+        <PlaceContext.Provider value={{ selectedPlace, setSelectedPlace, triggerCountUp, setTriggerCountUp }}>
             {children}
         </PlaceContext.Provider>
     );
-};
+}
 
-// 👉 4. 커스텀 훅 정의 (null 방지)
-export const usePlace = (): PlaceContextType => {
+export function usePlace() {
     const context = useContext(PlaceContext);
     if (!context) {
         throw new Error('usePlace must be used within a PlaceProvider');
     }
     return context;
-};
+}

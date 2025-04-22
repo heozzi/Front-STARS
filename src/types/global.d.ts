@@ -1,15 +1,15 @@
-// 👇 window.fullpage_api 타입 보강
+// global.d.ts
 declare global {
     interface Window {
-      fullpage_api: {
-        moveSectionUp: () => void;
-        moveSectionDown?: () => void;
-        moveSlideRight?: () => void;
-        moveSlideLeft: () => void;
-        setAllowScrolling: (value: boolean) => void;
-        setKeyboardScrolling: (value: boolean) => void;
-      };
+        fullpage_api?: {
+            moveSlideLeft: () => void;
+            moveSlideRight: () => void;
+            moveSectionUp: () => void;
+            moveSectionDown: () => void;
+            setAllowScrolling(b: boolean): void;
+            setKeyboardScrolling(b: boolean): void;
+        };
     }
-  }
+}
 
 export {};

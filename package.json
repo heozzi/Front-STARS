@@ -10,20 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fullpage/react-fullpage": "^0.1.14",
+    "@fullpage/react-fullpage": "^0.1.48",
+    "countup.js": "^2.8.0",
     "framer-motion": "^12.7.3",
-    "fullpage.js": "^2.9.7",
-    "install": "^0.13.0",
-    "jquery": "^3.7.1",
-    "lpm": "^0.0.4",
+    "fullpage.js": "4.0.5",
     "mapbox-gl": "^3.11.0",
+    "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
-    "@types/jquery": "^3.5.32",
+    "@types/fullpage.js": "^2.9.6",
     "@types/mapbox-gl": "^3.4.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
