@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 // 데이터 인터페이스
 interface TouristSpot {
@@ -26,27 +26,10 @@ interface TouristInfo {
     participantCount: string;
 }
 
-declare global {
-    interface Window {
-        fullpage_api: {
-            setAllowScrolling: (value: boolean) => void;
-            setKeyboardScrolling: (value: boolean) => void;
-        };
-    }
-}
-
 function Admin() {
     // 스크롤 관련 참조
     const spotsScrollRef = useRef<HTMLDivElement>(null);
     const touristInfoScrollRef = useRef<HTMLDivElement>(null);
-
-    // 스크롤 위치 상태
-    const [spotsScrollPos, setSpotsScrollPos] = useState(0);
-    const [touristInfoScrollPos, setTouristInfoScrollPos] = useState(0);
-
-    // 스크롤 방지 플래그
-    const [isScrollingSpots, setIsScrollingSpots] = useState(false);
-    const [isScrollingTouristInfo, setIsScrollingTouristInfo] = useState(false);
 
     // 컴포넌트 마운트 시 실행
     useEffect(() => {
@@ -127,13 +110,7 @@ function Admin() {
 
             if (spotsScrollRef.current) {
                 spotsScrollRef.current.scrollTop = newScrollTop;
-                setSpotsScrollPos(newScrollTop);
             }
-
-            setIsScrollingSpots(true);
-            setTimeout(() => {
-                setIsScrollingSpots(false);
-            }, 150);
         };
 
         spotsScrollRef.current.addEventListener('wheel', handleSpotsWheel, { passive: false });
@@ -157,13 +134,7 @@ function Admin() {
 
             if (touristInfoScrollRef.current) {
                 touristInfoScrollRef.current.scrollTop = newScrollTop;
-                setTouristInfoScrollPos(newScrollTop);
             }
-
-            setIsScrollingTouristInfo(true);
-            setTimeout(() => {
-                setIsScrollingTouristInfo(false);
-            }, 150);
         };
 
         touristInfoScrollRef.current.addEventListener('wheel', handleTouristInfoWheel, { passive: false });
