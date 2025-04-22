@@ -2,10 +2,11 @@
 import {JSX, useEffect} from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
 import MapSection from './components/MapSection';
-import About from './components/About';
+// import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import MyPage from './components/MyPage';
+import DashboardDemo from './components/DashboardDemo';
 
 function App(): JSX.Element {
     useEffect(() => {
@@ -33,7 +34,7 @@ function App(): JSX.Element {
                         </div>
 
                         {/* 이후 세로 섹션들 (About, Projects, Contact) */}
-                        <div className="section"><About /></div>
+                        <div className="section"><DashboardDemo /></div>
                         <div className="section"><Projects /></div>
                         <div className="section"><Contact /></div>
                     </ReactFullpage.Wrapper>
