@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // 데이터 인터페이스
 interface TouristSpot {
@@ -26,163 +26,11 @@ interface TouristInfo {
     participantCount: string;
 }
 
-function Admin() {
-    // 스크롤 관련 참조
-    const spotsScrollRef = useRef<HTMLDivElement>(null);
-    const touristInfoScrollRef = useRef<HTMLDivElement>(null);
-
-    // 스크롤 위치 상태
-    const [, setSpotsScrollPos] = useState(0);
-    const [, setTouristInfoScrollPos] = useState(0);
-
-    // 스크롤 방지 플래그
-    const [, setIsScrollingSpots] = useState(false);
-    const [, setIsScrollingTouristInfo] = useState(false);
-
+export default function Admin() {
     // 컴포넌트 마운트 시 실행
-    useEffect(() => {
-        // 스크롤 비활성화
-        if (window.fullpage_api) {
-            window.fullpage_api.setAllowScrolling(false);
-            window.fullpage_api.setKeyboardScrolling(false);
-        }
-
-        // 커스텀 스타일 추가
-        const styleElement = document.createElement("style");
-        styleElement.textContent = `
-            .custom-scrollbar {
-                scrollbar-width: thin;
-                scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-            }
-            
-            .custom-scrollbar::-webkit-scrollbar {
-                width: 6px;
-            }
-            
-            .custom-scrollbar::-webkit-scrollbar-track {
-                background: transparent;
-            }
-            
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-                background-color: rgba(0, 0, 0, 0.3);
-                border-radius: 3px;
-            }
-            
-            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                background-color: rgba(0, 0, 0, 0.5);
-            }
-            
-            /* 백업 스크롤 방지 */
-            body.disable-scroll {
-                overflow: hidden !important;
-            }
-            
-            .fp-section, .fp-slide, .fp-slidesContainer {
-                overflow: visible !important;
-            }
-        `;
-        document.head.appendChild(styleElement);
-
-        // 전역 스크롤 이벤트 핸들러
-        const handleGlobalWheel = (e: WheelEvent) => {
-            const isInSpotsScroll =
-                spotsScrollRef.current?.contains(e.target as Node) || false;
-            const isInTouristInfoScroll =
-                touristInfoScrollRef.current?.contains(e.target as Node) ||
-                false;
-
-            if (isInSpotsScroll || isInTouristInfoScroll) {
-                e.stopPropagation();
-            }
-        };
-
-        // 이벤트 리스너 등록
-        document.addEventListener("wheel", handleGlobalWheel, {
-            passive: false,
-        });
-        document.body.classList.add("disable-scroll");
-
-        return () => {
-            document.removeEventListener("wheel", handleGlobalWheel);
-            document.body.classList.remove("disable-scroll");
-            document.head.removeChild(styleElement);
-        };
-    }, []);
-
-    // 스팟 카드 스크롤 관련 함수들
-    useEffect(() => {
-        if (!spotsScrollRef.current) return;
-
-        const handleSpotsWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const scrollAmount = e.deltaY;
-            const currentScrollTop = spotsScrollRef.current?.scrollTop || 0;
-            const newScrollTop = currentScrollTop + scrollAmount;
-
-            if (spotsScrollRef.current) {
-                spotsScrollRef.current.scrollTop = newScrollTop;
-                setSpotsScrollPos(newScrollTop);
-            }
-
-            setIsScrollingSpots(true);
-            setTimeout(() => {
-                setIsScrollingSpots(false);
-            }, 150);
-        };
-
-        spotsScrollRef.current.addEventListener("wheel", handleSpotsWheel, {
-            passive: false,
-        });
-
-        return () => {
-            spotsScrollRef.current?.removeEventListener(
-                "wheel",
-                handleSpotsWheel
-            );
-        };
-    }, [spotsScrollRef]);
-
-    // 관광지 정보 스크롤 관련 함수들
-    useEffect(() => {
-        if (!touristInfoScrollRef.current) return;
-
-        const handleTouristInfoWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const scrollAmount = e.deltaY;
-            const currentScrollTop =
-                touristInfoScrollRef.current?.scrollTop || 0;
-            const newScrollTop = currentScrollTop + scrollAmount;
-
-            if (touristInfoScrollRef.current) {
-                touristInfoScrollRef.current.scrollTop = newScrollTop;
-                setTouristInfoScrollPos(newScrollTop);
-            }
-
-            setIsScrollingTouristInfo(true);
-            setTimeout(() => {
-                setIsScrollingTouristInfo(false);
-            }, 150);
-        };
-
-        touristInfoScrollRef.current.addEventListener(
-            "wheel",
-            handleTouristInfoWheel,
-            { passive: false }
-        );
-
-        return () => {
-            touristInfoScrollRef.current?.removeEventListener(
-                "wheel",
-                handleTouristInfoWheel
-            );
-        };
-    }, [touristInfoScrollRef]);
-
     // 미세먼지 상태에 따른 색상 반환 함수
+    const navigate = useNavigate();
+
     const getDustColor = (status: string) => {
         switch (status) {
             case "좋음":
@@ -445,19 +293,20 @@ function Admin() {
     ];
 
     return (
-        <div className="w-full mx-auto bg-gray-100 h-screen flex flex-col">
+        <div className="bg-gray-100 min-h-screen flex flex-col w-full">
             {/* 헤더 */}
             <div className="bg-white px-6 py-4 flex justify-between items-center border-b shadow-sm">
                 <button
                     className="bg-white shadow-md px-4 py-2 text-indigo-500 font-semibold hover:bg-indigo-500 hover:text-white transition"
-                    onClick={() => window.fullpage_api?.moveSlideLeft()} // ← 왼쪽으로 슬라이드 이동
+                    // 버튼을 누르면 "/" 즉 루트로 이동
+                    onClick={() => navigate("/")}
                 >
                     ← 돌아가기
                 </button>
                 <h1 className="text-2xl font-bold text-black">
                     STARS 관리자 통합 화면
                 </h1>
-                <div className="w-36"></div>{" "}
+                <div className="w-max"></div>{" "}
                 {/* 더미 요소로 제목 중앙 정렬 유지 */}
             </div>
 
@@ -479,7 +328,6 @@ function Admin() {
                     >
                         {/* 스크롤 가능한 카드 영역 */}
                         <div
-                            ref={spotsScrollRef}
                             className="overflow-y-auto h-full px-1 custom-scrollbar"
                             style={{
                                 position: "absolute",
@@ -585,7 +433,6 @@ function Admin() {
                             <div className="text-center text-black">혼잡도</div>
                         </div>
                         <div
-                            ref={touristInfoScrollRef}
                             className="overflow-y-auto flex-1 custom-scrollbar"
                             style={{
                                 minHeight: "250px",
@@ -618,5 +465,3 @@ function Admin() {
         </div>
     );
 }
-
-export default Admin;
