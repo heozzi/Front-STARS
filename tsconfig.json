@@ -10,6 +10,7 @@
     "paths": {
       "*": ["types/*"]
     },
+    "lib": ["ES2020", "DOM"],
   },
   "include": [
     "src",

@@ -10,7 +10,8 @@ interface FocusCardProps {
     show: boolean;
     onClose: () => void;
     onDetail: () => void;
-    isFavorite: boolean;
+    // isFavorite: boolean;
+    // 즐겨찾기 기능을 사용하지 않으니 임시로 주석처리
 }
 
 /**
