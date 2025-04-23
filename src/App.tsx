@@ -7,8 +7,8 @@ import MapSection from "./components/MapSection";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import DashboardDemo from "./components/DashboardDemo";
-import Manage from "./components/Admin";
-import AdminLogin from "./components/AdminLogin";
+import AdminLogin from "./components/admin/AdminLogin";
+import Admin from "./components/admin/Admin";
 
 function FullPageLayout(): JSX.Element {
     useEffect(() => {
@@ -61,7 +61,7 @@ function App(): JSX.Element {
         <Router>
             <Routes>
                 <Route path="/" element={<FullPageLayout />} />
-                <Route path="/manage" element={<Manage />} />
+                <Route path="/manage" element={<Admin />} />
             </Routes>
         </Router>
     );
