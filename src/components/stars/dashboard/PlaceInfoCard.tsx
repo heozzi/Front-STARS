@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { places } from "../../data/placesData";
+import { places } from "../../../data/placesData";
 
 interface PlaceInfoCardProps {
     place: (typeof places)[keyof typeof places];

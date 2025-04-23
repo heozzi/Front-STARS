@@ -1,10 +1,10 @@
-// src/components/MapSection.tsx
+// src/components/MapSectionComponent.tsx
 
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { usePlace } from '../context/PlaceContext';
-import { places } from '../data/placesData';
+import { usePlace } from '../../context/PlaceContext';
+import { places } from '../../data/placesData';
 import FocusCard from './FocusCard'; // 분리된 카드 컴포넌트
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
@@ -19,7 +19,7 @@ const markerPlaces: MarkerPlace[] = [
     { id: 'lotteTower', coords: [127.1025, 37.5131] },
 ];
 
-export default function MapSection() {
+export default function MapSectionComponent() {
     const mapContainer = useRef<HTMLDivElement | null>(null);
     const { setSelectedPlace, setTriggerCountUp } = usePlace();
     const [showFocusCard, setShowFocusCard] = useState(false);

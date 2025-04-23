@@ -1,5 +1,5 @@
-import { usePlace } from "../context/PlaceContext";
-import { places } from "../data/placesData";
+import { usePlace } from "../../context/PlaceContext";
+import { places } from "../../data/placesData";
 import {
     LineChart,
     Line,
@@ -8,7 +8,7 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
-import { useCountUp } from "../hooks/useCountUp";
+import { useCountUp } from "../../hooks/useCountUp";
 import { useEffect } from "react";
 
 export default function About() {

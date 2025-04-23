@@ -1,7 +1,7 @@
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useMemo, useState } from "react";
-import { usePlace } from "../context/PlaceContext";
-import { places } from "../data/placesData";
+import { usePlace } from "../../context/PlaceContext";
+import { places } from "../../data/placesData";
 import {
     LineChart,
     Line,
