@@ -18,8 +18,16 @@ export default function AdminLogin() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
+        <div className="w-full h-screen bg-gray-100 flex items-center justify-center relative">
+            <div className="absolute top-6 left-6 z-30">
+                <button
+                    className="bg-white shadow-md px-4 py-2 text-indigo-500 font-semibold hover:bg-indigo-500 hover:text-white transition"
+                    onClick={() => window.fullpage_api?.moveSlideLeft()} // ← 왼쪽으로 슬라이드 이동
+                >
+                    ← 돌아가기
+                </button>
+            </div>
+            <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-md">
                 <div>
                     <h2 className="text-center text-3xl font-bold text-gray-900">
                         관리자 로그인
@@ -38,6 +46,7 @@ export default function AdminLogin() {
                                 id="username"
                                 name="username"
                                 type="text"
+                                placeholder={"Admin ID"}
                                 required
                                 className="bg-white appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 value={username}
@@ -55,6 +64,7 @@ export default function AdminLogin() {
                                 id="password"
                                 name="password"
                                 type="password"
+                                placeholder={"Password"}
                                 required
                                 className="bg-white appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 value={password}
