@@ -1,7 +1,7 @@
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useMemo, useState } from "react";
-import { usePlace } from "../context/PlaceContext";
-import { places } from "../data/placesData";
+import { usePlace } from "../../context/PlaceContext";
+import { places } from "../../data/placesData";
 import { CountUp } from "countup.js";
 import VisitorCountCard from "./dashboard/VisitorCountCard";
 import PlaceInfoCard from "./dashboard/PlaceInfoCard";
@@ -13,7 +13,7 @@ import ReviewAnalysisCard from "./dashboard/ReviewAnalysisCard";
 import TrafficInfoCard from "./dashboard/TrafficInfoCard";
 import ParkingInfoCard from "./dashboard/ParkingInfoCard";
 
-export default function Dashboard() {
+export default function DashboardComponent() {
     const containerRef = useRef<HTMLDivElement | null>(null);
     useScroll({ container: containerRef });
 
