@@ -116,7 +116,7 @@ export default function DashboardDemo() {
             <motion.div className="max-w-[1600px] mx-auto grid grid-cols-12 gap-4">
                 <motion.div
                     className="col-span-3 bg-white rounded-xl shadow-md p-4 my-2"
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     animate={cardStyles[0]}
                     style={cardStyles[0]}
                     ref={(el) => {
@@ -134,7 +134,7 @@ export default function DashboardDemo() {
 
                 <motion.div
                     className="col-span-6 bg-white rounded-xl shadow-md p-4 my-2"
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     animate={cardStyles[1]}
                     style={cardStyles[1]}
                     ref={(el) => {
@@ -163,7 +163,7 @@ export default function DashboardDemo() {
 
                 <motion.div
                     className="col-span-6 bg-white rounded-xl shadow-md p-4 my-2"
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     animate={cardStyles[3]}
                     style={cardStyles[3]}
                     ref={(el) => {
@@ -192,7 +192,7 @@ export default function DashboardDemo() {
 
                 <motion.div
                     className="col-span-6 bg-white rounded-xl shadow-md p-4 my-2"
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     animate={cardStyles[4]}
                     style={cardStyles[4]}
                     ref={(el) => {
@@ -217,7 +217,7 @@ export default function DashboardDemo() {
 
                 <motion.div
                     className="col-span-4 bg-white rounded-xl shadow-md p-4 flex flex-col gap-4 my-2"
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     animate={cardStyles[5]}
                     style={cardStyles[5]}
                     ref={(el) => {
@@ -246,7 +246,7 @@ export default function DashboardDemo() {
 
                 <motion.div
                     className="col-span-4 bg-white rounded-xl shadow-md p-4 my-2"
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     animate={cardStyles[6]}
                     style={cardStyles[6]}
                     ref={(el) => {
@@ -261,7 +261,7 @@ export default function DashboardDemo() {
 
                 <motion.div
                     className="col-span-4 bg-white rounded-xl shadow-md p-4 my-2"
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     animate={cardStyles[7]}
                     style={cardStyles[7]}
                     ref={(el) => {
@@ -284,7 +284,7 @@ export default function DashboardDemo() {
                         <motion.div
                             key={idx}
                             className="bg-white rounded-xl shadow-lg p-4 my-2"
-                            whileHover={{ y: -4 }}
+                            whileHover={{ y: -6 }}
                             animate={cardStyles[idx + 8]}
                             style={cardStyles[idx + 8]}
                             ref={(el) => {
