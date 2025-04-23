@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { CountUp } from "countup.js";
-import { places } from "../data/placesData";
+import { places } from "../../data/placesData";
 
 interface FocusCardProps {
     placeId: keyof typeof places;
