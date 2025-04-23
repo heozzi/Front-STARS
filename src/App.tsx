@@ -6,7 +6,8 @@ import ReactFullpage from "@fullpage/react-fullpage";
 import MapSection from "./components/MapSection";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import DashboardDemo from "./components/DashboardDemo";
+import Dashboard from "./components/Dashboard";
+// import DashboardDemo from "./components/DashboardDemo";
 import AdminLogin from "./components/admin/AdminLogin";
 import Admin from "./components/admin/Admin";
 
@@ -40,8 +41,11 @@ function FullPageLayout(): JSX.Element {
                         </div>
 
                         {/* 이후 세로 섹션들 (About, Projects, Contact) */}
+                        {/*<div className="section">*/}
+                        {/*    <DashboardDemo />*/}
+                        {/*</div>*/}
                         <div className="section">
-                            <DashboardDemo />
+                            <Dashboard />
                         </div>
                         <div className="section">
                             <Projects />
