@@ -112,7 +112,7 @@ export default function DashboardComponent() {
             ref={containerRef}
             className="h-screen w-full overflow-y-scroll bg-gray-100 text-black px-24 py-[150px]"
         >
-            <motion.div className="max-w-[1600px] mx-auto grid grid-cols-12 gap-4">
+            <motion.div className="max-w-[1000px] mx-auto grid grid-cols-12 gap-4">
                 <VisitorCountCard
                     refEl={visitorCountRef}
                     style={cardStyles[0]}
