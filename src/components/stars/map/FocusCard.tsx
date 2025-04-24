@@ -67,25 +67,32 @@ const FocusCard: React.FC<FocusCardProps> = ({
                 onClick={onClose}
             />
             {/* 안내 메시지 */}
-            <motion.div
-                className="fixed inline-flex z-20 items-center p-4 space-x-4 bg-white text-green-500 rounded-2xl shadow-xl bottom-10"
-                role="alert"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
-            >
-                <svg
-                    className="w-5 h-5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+            <div className="fixed bottom-10 w-full flex justify-center z-20">
+                <motion.div
+                    className="flex items-center justify-center p-4 space-x-4 bg-white text-green-500 rounded-2xl shadow-xl"
+                    role="alert"
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        repeatDelay: 1,
+                    }}
                 >
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                </svg>
-                <div className="text-sm font-bold text-gray-500">
-                    돌아가시려면 화면 밖을 클릭해 주세요.
-                </div>
-            </motion.div>
+                    {/* Content */}
+                    <svg
+                        className="w-5 h-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <div className="text-sm font-bold text-gray-500">
+                        돌아가시려면 화면 밖을 클릭해 주세요.
+                    </div>
+                </motion.div>
+            </div>
             {/* 카드 본문 */}
             <div
                 className="relative z-20 flex flex-col items-center gap-6 max-w-5xl w-full px-6"
