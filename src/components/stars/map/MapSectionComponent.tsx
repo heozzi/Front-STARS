@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { usePlace } from '../../context/PlaceContext';
-import { places } from '../../data/placesData';
+import { usePlace } from '../../../context/PlaceContext';
+import { places } from '../../../data/placesData';
 import FocusCard from './FocusCard'; // 분리된 카드 컴포넌트
+import SearchBar from "./SearchBar";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
@@ -59,6 +60,11 @@ export default function MapSectionComponent() {
         return () => map.remove();
     }, [setSelectedPlace]);
 
+    const handleSearch = (query: string) => {
+        console.log("검색어:", query);
+        // 검색 로직 추가
+    };
+
     return (
         <div className="relative w-screen h-screen">
             {/* 우측 상단 로그인 버튼 */}
@@ -71,7 +77,11 @@ export default function MapSectionComponent() {
                 </button>
             </div>
 
-            {/* Mapbox 지도 */}
+            {/* 검색 바 */}
+            <SearchBar onSearch={handleSearch} />
+
+
+                {/* Mapbox 지도 */}
             <div className="w-full h-full" ref={mapContainer} />
 
             {/* 선택된 관광지 정보 카드 */}
