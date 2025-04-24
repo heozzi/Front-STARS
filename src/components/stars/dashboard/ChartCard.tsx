@@ -17,7 +17,7 @@ interface ChartCardProps {
 export default function ChartCard({ data, style, cardRef }: ChartCardProps) {
     return (
         <motion.div
-            className="col-span-6 bg-white rounded-xl shadow-md p-4 my-2"
+            className="col-span-6 bg-white rounded-xl shadow-lg p-4 my-2"
             whileHover={{ y: -6 }}
             animate={style}
             style={style}

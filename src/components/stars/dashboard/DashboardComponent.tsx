@@ -1,17 +1,17 @@
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useMemo, useState } from "react";
-import { usePlace } from "../../context/PlaceContext";
-import { places } from "../../data/placesData";
+import { usePlace } from "../../../context/PlaceContext";
+import { places } from "../../../data/placesData";
 import { CountUp } from "countup.js";
-import VisitorCountCard from "./dashboard/VisitorCountCard";
-import PlaceInfoCard from "./dashboard/PlaceInfoCard";
-import WeatherCard from "./dashboard/WeatherCard";
-import ChartCard from "./dashboard/ChartCard";
-import ActionButton from "./dashboard/ActionButton";
-import POICardList from "./dashboard/POICardList";
-import ReviewAnalysisCard from "./dashboard/ReviewAnalysisCard";
-import TrafficInfoCard from "./dashboard/TrafficInfoCard";
-import ParkingInfoCard from "./dashboard/ParkingInfoCard";
+import VisitorCountCard from "./VisitorCountCard";
+import PlaceInfoCard from "./PlaceInfoCard";
+import WeatherCard from "./WeatherCard";
+import ChartCard from "./ChartCard";
+import ActionButton from "./ActionButton";
+import POICardList from "./POICardList";
+import ReviewAnalysisCard from "./ReviewAnalysisCard";
+import TrafficInfoCard from "./TrafficInfoCard";
+import ParkingInfoCard from "./ParkingInfoCard";
 
 export default function DashboardComponent() {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -112,7 +112,7 @@ export default function DashboardComponent() {
             ref={containerRef}
             className="h-screen w-full overflow-y-scroll bg-gray-100 text-black px-24 py-[150px]"
         >
-            <motion.div className="max-w-[1600px] mx-auto grid grid-cols-12 gap-4">
+            <motion.div className="max-w-[1000px] mx-auto grid grid-cols-12 gap-4">
                 <VisitorCountCard
                     refEl={visitorCountRef}
                     style={cardStyles[0]}

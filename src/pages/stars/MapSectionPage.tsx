@@ -1,4 +1,4 @@
-import MapSectionComponent from "../../components/stars/MapSectionComponent";
+import MapSectionComponent from "../../components/stars/map/MapSectionComponent";
 
 export default function MapSectionPage() {
     return (
