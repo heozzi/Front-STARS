@@ -1,0 +1,43 @@
+import { useState } from "react";
+import { FaBars, FaSearch } from "react-icons/fa";
+import Menu from "./Menu";
+
+export default function SearchBarWithMenu() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen((prev) => !prev);
+    };
+
+    return (
+        <div>
+            {/* SearchBar */}
+            <div
+                className={`absolute top-6 left-6 z-30 w-96 bg-white shadow-md flex items-center rounded-full px-4 py-2 transition-all duration-300 ${
+                    isMenuOpen ? "bg-opacity-90" : "bg-opacity-60 hover:bg-opacity-90"
+                }`}
+            >
+                <button
+                    className="bg-transparent text-gray-500 hover:text-gray-700 mr-3 focus:outline-none border-0"
+                    onClick={toggleMenu}
+                >
+                    <FaBars size={20} />
+                </button>
+                <input
+                    type="text"
+                    placeholder="궁금하신 장소를 입력하세요!"
+                    className="flex-1 bg-transparent outline-none text-gray-700 placeholder-gray-400"
+                />
+                <button
+                    className="bg-transparent text-indigo-500 hover:text-indigo-700 transition focus:outline-none border-0"
+                    onClick={() => console.log("검색 실행")}
+                >
+                    <FaSearch size={20} />
+                </button>
+            </div>
+
+            {/* 메뉴 컴포넌트 */}
+            <Menu isOpen={isMenuOpen} />
+        </div>
+    );
+}
