@@ -1,9 +1,11 @@
 import { touristInfo, touristSpots, weatherData } from "../../data/adminData";
-import {WeatherCard} from "./cards/weatherCard";
-import {SpotCard} from "./cards/spotCard";
+import { WeatherCard } from "./cards/weatherCard";
+import { SpotCard } from "./cards/spotCard";
 import AdminHeader from "./AdminHeader";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminComponent() {
+    const navigate = useNavigate();
 
     return (
         <div className="bg-gray-100 h-auto flex flex-col w-full overflow-y-hidden">
@@ -62,6 +64,9 @@ export default function AdminComponent() {
                                 <div
                                     key={idx}
                                     className="grid grid-cols-4 py-4 border-b hover:bg-gray-100 transition-colors"
+                                    onClick={() => {
+                                        navigate(`${info.spotCode}`);
+                                    }}
                                 >
                                     <div className="text-center text-black">
                                         {info.spotName}
