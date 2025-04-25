@@ -28,7 +28,6 @@ export default function MapSectionComponent() {
         keyof typeof places | null
     >(null);
 
-    console.log("CI테스트 CI테스트 CI테스트 CI테스트 CI테스트 CI테스트");
     // 지도 초기화 + 마커 이벤트 등록
     useEffect(() => {
         if (!mapContainer.current) return;
