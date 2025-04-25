@@ -52,14 +52,12 @@ const FocusCard: React.FC<FocusCardProps> = ({
     }, [placeId, show]);
 
     return (
-        <motion.div
+        <div
             className={`absolute inset-0 z-20 flex justify-center items-center transition-opacity duration-500 ${
                 show
                     ? "opacity-100 pointer-events-auto"
                     : "opacity-0 pointer-events-none"
             }`}
-            initial={false}
-            animate={{ opacity: show ? 1 : 0 }}
         >
             {/* 배경 블러 */}
             <div
@@ -186,7 +184,7 @@ const FocusCard: React.FC<FocusCardProps> = ({
                     자세히 보기 ↓
                 </motion.div>
             </div>
-        </motion.div>
+        </div>
     );
 };
 
