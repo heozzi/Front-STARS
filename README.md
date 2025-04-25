@@ -61,6 +61,11 @@ VITE_MAPBOX_TOKEN=your_mapbox_access_token
 VITE_OPENWEATHER_API_KEY=your_openweather_api_key
 ```
 
+# 🏁 Run !
+```bash
+npm run dev
+```
+
 ---
 
 # React + TypeScript + Vite
