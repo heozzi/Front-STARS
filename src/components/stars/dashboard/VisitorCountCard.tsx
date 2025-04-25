@@ -14,7 +14,7 @@ export default function VisitorCountCard({
 }: VisitorCountCardProps) {
     return (
         <motion.div
-            className="col-span-3 bg-orange-500 rounded-xl shadow-lg p-4 my-2"
+            className="col-span-3 bg-emerald-500 rounded-xl shadow-lg p-4 my-2"
             whileHover={{ y: -6 }}
             animate={style}
             style={style}

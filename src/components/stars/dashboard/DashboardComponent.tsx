@@ -12,6 +12,8 @@ import POICardList from "./POICardList";
 import ReviewAnalysisCard from "./ReviewAnalysisCard";
 import TrafficInfoCard from "./TrafficInfoCard";
 import ParkingInfoCard from "./ParkingInfoCard";
+import PlaceImageCard from "./PlaceImageCard";
+import CongestionStatusCard from "./CongestionStatusCard";
 
 export default function DashboardComponent() {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -88,7 +90,7 @@ export default function DashboardComponent() {
 
                 if (cardCenter < containerTop + fadeMargin) {
                     const ratio = (cardCenter - containerTop) / fadeMargin;
-                    opacity = Math.max(0, ratio);
+                    // opacity = Math.max(0, ratio);
                     y = -30 * (1 - ratio);
                 } else if (cardCenter > containerBottom - fadeMargin) {
                     const ratio = (containerBottom - cardCenter) / fadeMargin;
@@ -118,43 +120,60 @@ export default function DashboardComponent() {
                     style={cardStyles[0]}
                     cardRef={(el) => (cardRefs.current[0] = el)}
                 />
+
                 <PlaceInfoCard
                     place={place}
                     style={cardStyles[1]}
                     cardRef={(el) => (cardRefs.current[1] = el)}
                 />
-                <ActionButton
+
+                <CongestionStatusCard
+                    status="약간붐빔" // 또는 place.congestionStatus
                     style={cardStyles[2]}
                     cardRef={(el) => (cardRefs.current[2] = el)}
                 />
-                <WeatherCard
+
+                <ActionButton
                     style={cardStyles[3]}
                     cardRef={(el) => (cardRefs.current[3] = el)}
                 />
-                <ChartCard
-                    data={place.weeklyStats}
+
+                <PlaceImageCard
+                    image={place.image}
                     style={cardStyles[4]}
                     cardRef={(el) => (cardRefs.current[4] = el)}
                 />
-                <ReviewAnalysisCard
-                    image={place.image}
+
+                <WeatherCard
                     style={cardStyles[5]}
                     cardRef={(el) => (cardRefs.current[5] = el)}
                 />
 
-                <TrafficInfoCard
+                <ChartCard
+                    data={place.weeklyStats}
                     style={cardStyles[6]}
                     cardRef={(el) => (cardRefs.current[6] = el)}
                 />
 
-                <ParkingInfoCard
+                <ReviewAnalysisCard
+                    image={place.image}
                     style={cardStyles[7]}
                     cardRef={(el) => (cardRefs.current[7] = el)}
                 />
 
+                <TrafficInfoCard
+                    style={cardStyles[8]}
+                    cardRef={(el) => (cardRefs.current[8] = el)}
+                />
+
+                <ParkingInfoCard
+                    style={cardStyles[9]}
+                    cardRef={(el) => (cardRefs.current[9] = el)}
+                />
+
                 <POICardList
                     pois={dummyPOIs}
-                    baseIndex={8}
+                    baseIndex={10} // 중요! 인덱스 충돌 방지
                     cardRefs={cardRefs}
                     cardStyles={cardStyles}
                 />

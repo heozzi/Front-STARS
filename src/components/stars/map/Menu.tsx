@@ -25,7 +25,7 @@ export default function Menu({ isOpen }: MenuProps) {
 
     return (
         <div
-            className={`absolute top-28 w-96 bg-white shadow-lg rounded-lg bg-opacity-90 transition-transform duration-300 z-20 ${
+            className={`absolute top-28 w-96 bg-white shadow-lg rounded-2xl bg-opacity-90 transition-transform duration-300 z-20 ${
                 isOpen ? "translate-x-6 opacity-100 pointer-events-auto" : "-translate-x-full pointer-events-none"
             }`}
         >
@@ -101,7 +101,7 @@ function renderDropdown(
         <div className="relative">
             <div
                 onClick={() => setOpen(!isOpen)}
-                className="flex items-center justify-between text-gray-700 cursor-pointer text-sm hover:bg-gray-100 transition"
+                className="flex items-center justify-between text-gray-700 cursor-pointer text-sm transition"
             >
                 {selected}
                 <svg className="w-3 h-3 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">

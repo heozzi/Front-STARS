@@ -22,7 +22,7 @@ export default function ReviewAnalysisCard({
             <img
                 src={image}
                 alt="preview"
-                className="rounded-xl object-cover w-full h-40"
+                className="rounded-xl shadow-lg object-cover w-full h-40"
             />
             <div>
                 <p className="text-sm text-gray-700 font-semibold">
