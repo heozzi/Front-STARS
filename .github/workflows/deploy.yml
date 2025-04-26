@@ -15,7 +15,6 @@ on:
 jobs:
   upload-image:
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.environment == 'version' }}
     env :
       IMAGE_TAG: ${{ github.run_number }}
     steps:
